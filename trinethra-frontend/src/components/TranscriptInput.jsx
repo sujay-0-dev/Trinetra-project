@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function TranscriptInput({ onResult }) {
+export default function TranscriptInput({ onResult, onStart, onError }) {
   const [transcript, setTranscript] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,6 +11,7 @@ export default function TranscriptInput({ onResult }) {
       return;
     }
 
+    if (onStart) onStart();
     setIsLoading(true);
     setError(null);
 
@@ -33,6 +34,7 @@ export default function TranscriptInput({ onResult }) {
         onResult(data);
       }
     } catch (err) {
+      if (onError) onError(err);
       setError(err.message);
     } finally {
       setIsLoading(false);
