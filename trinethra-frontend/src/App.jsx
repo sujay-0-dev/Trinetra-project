@@ -22,18 +22,7 @@ function App() {
           <h2 style={{ marginTop: 0, marginBottom: '1rem', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.75rem', fontSize: '1.5rem', color: '#111827' }}>
             Raw Developer Data
           </h2>
-          <pre style={{ 
-            whiteSpace: 'pre-wrap', 
-            wordBreak: 'break-word',
-            backgroundColor: '#f9fafb',
-            padding: '1.5rem',
-            borderRadius: '10px',
-            border: '1px solid #e5e7eb',
-            overflowX: 'auto',
-            fontSize: '0.95rem',
-            color: '#374151',
-            fontFamily: 'monospace'
-          }}>
+          <pre className="raw-output">
             {JSON.stringify(result, null, 2)}
           </pre>
         </div>
