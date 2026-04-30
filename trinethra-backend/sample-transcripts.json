@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Karthik",
+    "transcript": "Karthik is a solid team member. He consistently completes all the assignments I give him. Last week, he noticed our report was missing some data and brought it to my attention before we sent it out, which was helpful. He's very reliable and gets things done on time, though he usually waits for me to assign the next piece of work rather than building entirely new processes."
+  },
+  {
+    "name": "Meena",
+    "transcript": "Meena has been fantastic. Not only does she do her core work flawlessly, but she noticed that our lead conversion tracking was entirely manual and prone to errors. Without me asking, she built an automated tracker in Excel and taught the rest of the floor how to use it. Even if she leaves tomorrow, the team will continue using the tracker she built."
+  },
+  {
+    "name": "Anil",
+    "transcript": "Anil is a great help to have around. He handles all of my administrative tasks and takes calls for me when I'm busy. He's always on the floor and very enthusiastic. However, he doesn't really document his work or create any systems. If he were to leave, we would struggle to figure out how he was managing all those tasks."
+  }
+]
