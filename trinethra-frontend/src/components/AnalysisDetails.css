@@ -55,6 +55,38 @@
   box-shadow: var(--shadow-sm);
 }
 
+.detail-card.flagged-card {
+  border: 2px solid #f59e0b;
+  background-color: #fffbeb;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+.flag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.flag-btn:hover {
+  background: #f3f4f6;
+  color: var(--text-main);
+}
+
+.flag-btn.flagged {
+  border-color: #f59e0b;
+  color: #d97706;
+  background: #fef3c7;
+}
+
 .card-header {
   display: flex;
   justify-content: space-between;

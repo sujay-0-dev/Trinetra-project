@@ -1,4 +1,5 @@
 import React from 'react';
+import EvidenceList from './EvidenceList';
 import './AnalysisDetails.css';
 
 export default function AnalysisDetails({ result }) {
@@ -15,20 +16,7 @@ export default function AnalysisDetails({ result }) {
           <h3 className="section-title">
             <span className="section-icon">🔍</span> Key Evidence Found
           </h3>
-          <div className="grid-list">
-            {evidence.map((item, idx) => (
-              <div key={idx} className="detail-card">
-                <div className="card-header">
-                  <span className={`signal-badge signal-${item.signal?.toLowerCase()}`}>
-                    {item.signal}
-                  </span>
-                  <span className="dimension-tag">{item.dimension}</span>
-                </div>
-                <blockquote className="quote-text">"{item.quote}"</blockquote>
-                <p className="interpretation-text"><strong>Interpretation:</strong> {item.interpretation}</p>
-              </div>
-            ))}
-          </div>
+          <EvidenceList evidence={evidence} />
         </section>
       )}
 
