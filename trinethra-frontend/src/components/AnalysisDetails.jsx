@@ -1,5 +1,8 @@
 import React from 'react';
 import EvidenceList from './EvidenceList';
+import KpiMapping from './KpiMapping';
+import GapAnalysis from './GapAnalysis';
+import FollowUpQuestions from './FollowUpQuestions';
 import './AnalysisDetails.css';
 
 export default function AnalysisDetails({ result }) {
@@ -26,47 +29,17 @@ export default function AnalysisDetails({ result }) {
           <h3 className="section-title">
             <span className="section-icon">📈</span> Business KPI Impact
           </h3>
-          <div className="grid-list">
-            {kpiMapping.map((item, idx) => {
-              if (!item.evidence && !item.systemOrPersonal) return null; // Skip empty KPIs
-              return (
-                <div key={idx} className="detail-card kpi-card">
-                  <div className="kpi-header">
-                    <h4 className="kpi-name">{item.kpi}</h4>
-                    {item.systemOrPersonal && (
-                      <span className="system-tag">{item.systemOrPersonal}</span>
-                    )}
-                  </div>
-                  {item.evidence ? (
-                    <p className="kpi-evidence">{item.evidence}</p>
-                  ) : (
-                    <p className="kpi-evidence empty">No specific evidence mentioned for this KPI.</p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          <KpiMapping kpiMapping={kpiMapping} />
         </section>
       )}
 
       {/* Gaps Section */}
-      {gaps && gaps.length > 0 && (
-        <section className="detail-section">
-          <h3 className="section-title">
-            <span className="section-icon">⚠️</span> Identified Gaps
-          </h3>
-          <div className="gaps-list">
-            {gaps.map((item, idx) => (
-              <div key={idx} className="gap-item">
-                <div className="gap-content">
-                  <span className="gap-dimension">{item.dimension}</span>
-                  <p className="gap-detail">{item.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="detail-section">
+        <h3 className="section-title">
+          <span className="section-icon">⚠️</span> Identified Gaps
+        </h3>
+        <GapAnalysis gaps={gaps} />
+      </section>
 
       {/* Follow-up Questions Section */}
       {followUpQuestions && followUpQuestions.length > 0 && (
@@ -74,19 +47,7 @@ export default function AnalysisDetails({ result }) {
           <h3 className="section-title">
             <span className="section-icon">💬</span> Recommended Follow-up Questions
           </h3>
-          <div className="questions-list">
-            {followUpQuestions.map((item, idx) => (
-              <div key={idx} className="question-card">
-                <div className="question-text">
-                  <strong>Q:</strong> {item.question}
-                </div>
-                <div className="question-meta">
-                  <span className="meta-pill"><strong>Target Gap:</strong> {item.targetGap}</span>
-                  <span className="meta-pill"><strong>Looking For:</strong> {item.lookingFor}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <FollowUpQuestions followUpQuestions={followUpQuestions} />
         </section>
       )}
     </div>
