@@ -16,32 +16,92 @@ export default function EvidenceList({ evidence }) {
   };
 
   return (
-    <div className="grid-list">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
       {evidence.map((item, idx) => {
         const isFlagged = flaggedItems.has(idx);
+        
+        let signalBg = '#f3f4f6';
+        let signalText = '#6b7280';
+        if (item.signal?.toLowerCase() === 'positive') {
+          signalBg = '#f0fdf4';
+          signalText = '#16a34a';
+        } else if (item.signal?.toLowerCase() === 'negative') {
+          signalBg = '#fef2f2';
+          signalText = '#dc2626';
+        }
+        
         return (
-          <div key={idx} className={`detail-card ${isFlagged ? 'flagged-card' : ''}`}>
-            <div className="card-header">
-              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                <span className={`signal-badge signal-${item.signal?.toLowerCase()}`}>
-                  {item.signal}
-                </span>
-                <span className="dimension-tag">{item.dimension}</span>
-              </div>
-              <button 
-                className={`flag-btn ${isFlagged ? 'flagged' : ''}`}
-                onClick={() => toggleFlag(idx)}
-                title="Flag if you disagree with this analysis"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill={isFlagged ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                  <line x1="4" y1="22" x2="4" y2="15"></line>
-                </svg>
-                {isFlagged ? 'Flagged' : 'Flag'}
-              </button>
+          <div key={idx} style={{
+            backgroundColor: 'var(--color-surface)',
+            borderRadius: 'var(--radius)',
+            border: `1px solid ${isFlagged ? 'var(--color-amber)' : 'var(--color-border)'}`,
+            padding: '16px',
+            position: 'relative'
+          }}>
+            <button
+              onClick={() => toggleFlag(idx)}
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                background: 'transparent',
+                border: `1px solid ${isFlagged ? 'var(--color-amber)' : 'var(--color-border)'}`,
+                borderRadius: '4px',
+                padding: '4px 8px',
+                fontSize: '12px',
+                fontWeight: '600',
+                color: isFlagged ? 'var(--color-amber)' : 'var(--color-text-secondary)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              🚩 {isFlagged ? 'Flagged' : 'Flag'}
+            </button>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+              <span style={{
+                backgroundColor: signalBg,
+                color: signalText,
+                padding: '4px 10px',
+                borderRadius: '9999px',
+                fontSize: '12px',
+                fontWeight: '600',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em'
+              }}>
+                {item.signal}
+              </span>
+              <span style={{
+                fontSize: '13px',
+                color: 'var(--color-text-muted)',
+                fontWeight: '500'
+              }}>
+                {item.dimension}
+              </span>
             </div>
-            <blockquote className="quote-text">"{item.quote}"</blockquote>
-            <p className="interpretation-text"><strong>Interpretation:</strong> {item.interpretation}</p>
+            
+            <blockquote style={{
+              margin: '10px 0',
+              fontStyle: 'italic',
+              fontSize: '14px',
+              color: 'var(--color-text-secondary)',
+              borderLeft: '3px solid var(--color-border)',
+              paddingLeft: '12px',
+              lineHeight: '1.6'
+            }}>
+              "{item.quote}"
+            </blockquote>
+            
+            <p style={{
+              margin: '10px 0 0 0',
+              fontSize: '14px',
+              color: 'var(--color-text-primary)',
+              lineHeight: '1.6'
+            }}>
+              <strong style={{ fontWeight: '600' }}>Interpretation:</strong> {item.interpretation}
+            </p>
           </div>
         );
       })}
