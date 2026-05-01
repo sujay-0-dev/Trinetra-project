@@ -4,6 +4,7 @@ export default function TranscriptInput({ onResult, onStart, onError }) {
   const [transcript, setTranscript] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleAnalyze = async () => {
     if (!transcript.trim()) {
@@ -42,29 +43,69 @@ export default function TranscriptInput({ onResult, onStart, onError }) {
   };
 
   return (
-    <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div>
-        <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: '600', fontSize: '1.15rem', color: '#374151' }}>
-          Enter Supervisor Transcript
-        </label>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div 
+        style={{ 
+          backgroundColor: 'var(--color-surface)',
+          border: `1px solid ${isFocused ? 'var(--color-accent)' : 'var(--color-border)'}`,
+          borderRadius: 'var(--radius)',
+          boxShadow: 'var(--shadow-sm)',
+          overflow: 'hidden',
+          transition: 'border-color 0.2s ease',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <div style={{ padding: '12px 16px 0', fontSize: '0.85rem', fontWeight: '600', color: 'var(--color-text-secondary)' }}>
+          Supervisor Transcript
+        </div>
         <textarea
-          className="textarea-input"
+          style={{
+            border: 'none',
+            minHeight: '220px',
+            fontSize: '14px',
+            lineHeight: '1.7',
+            resize: 'vertical',
+            width: '100%',
+            padding: '12px 16px 16px',
+            outline: 'none',
+            background: 'transparent',
+            color: 'var(--color-text-primary)',
+            fontFamily: 'inherit'
+          }}
           placeholder="Paste the supervisor's feedback or interview transcript here. Try to include detailed notes for better analysis..."
           value={transcript}
           onChange={(e) => setTranscript(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           disabled={isLoading}
         />
       </div>
       
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
         <button
-          className="btn-primary"
+          style={{
+            backgroundColor: 'var(--color-accent)',
+            color: '#ffffff',
+            borderRadius: '6px',
+            padding: '10px 24px',
+            fontWeight: '600',
+            border: 'none',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            opacity: isLoading ? 0.7 : 1,
+            display: 'inline-flex',
+            alignItems: 'center',
+            fontSize: '14px',
+            transition: 'background-color 0.2s ease'
+          }}
+          onMouseEnter={(e) => { if (!isLoading) e.currentTarget.style.backgroundColor = '#1d4ed8'; }}
+          onMouseLeave={(e) => { if (!isLoading) e.currentTarget.style.backgroundColor = 'var(--color-accent)'; }}
           onClick={handleAnalyze}
           disabled={isLoading}
         >
           {isLoading ? (
             <>
-              <svg style={{ animation: 'spin 1s linear infinite', marginRight: '0.75rem' }} xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg style={{ animation: 'spin 1s linear infinite', marginRight: '0.5rem' }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="12" y1="2" x2="12" y2="6"></line>
                 <line x1="12" y1="18" x2="12" y2="22"></line>
                 <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
@@ -74,13 +115,13 @@ export default function TranscriptInput({ onResult, onStart, onError }) {
                 <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
                 <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
               </svg>
-              Analyzing Profile...
+              Analyzing...
             </>
           ) : 'Run Analysis'}
         </button>
         {error && (
-          <div style={{ color: '#dc2626', fontWeight: '600', background: '#fee2e2', padding: '0.75rem 1.25rem', borderRadius: '8px', border: '1px solid #fecaca' }}>
-            ⚠️ {error}
+          <div style={{ color: 'var(--color-red)', fontSize: '13px', marginTop: '4px' }}>
+            {error}
           </div>
         )}
       </div>
