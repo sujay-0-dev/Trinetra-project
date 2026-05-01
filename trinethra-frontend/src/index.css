@@ -1,1 +1,25 @@
-/* Cleared default styles to prevent centering bugs */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-border: #e2e6ea;
+  --color-text-primary: #1a1d23;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-accent: #2563eb;
+  --color-accent-light: #eff6ff;
+  --color-green: #16a34a;
+  --color-green-light: #f0fdf4;
+  --color-amber: #d97706;
+  --color-amber-light: #fffbeb;
+  --color-red: #dc2626;
+  --color-red-light: #fef2f2;
+  --radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--color-bg); color: var(--color-text-primary); font-family: var(--font); font-size: 15px; line-height: 1.6; }
