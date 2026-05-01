@@ -26,8 +26,9 @@ function App() {
 
       <main className={`main-content ${!result && !isAnalyzing ? 'centered-state' : ''}`}>
         {!result && !isAnalyzing && (
-          <div className="tagline">
-            Paste a supervisor transcript to generate a structured analysis.
+          <div className="tagline fade-in">
+            <h1 className="tagline-text">Analyze Performance Instantly</h1>
+            <p className="tagline-sub">Paste a supervisor transcript to generate a structured, AI-powered analysis.</p>
           </div>
         )}
 
